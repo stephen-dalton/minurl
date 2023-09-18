@@ -7,7 +7,7 @@ const InputBox = styled.input`
   margin: 0 auto;
   font-family: "Montserrat", sans-serif;
   border-radius: 5px;
-  font-size: 15px;
+  font-size: 11px;
 
   &::placeholder {
     text-align: center;

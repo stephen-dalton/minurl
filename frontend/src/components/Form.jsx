@@ -19,13 +19,29 @@ export default function Form() {
     setUrl(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(url);
     // call api
-    // wait for result
-    // setState
-    setUrl("https://localhost/miniUrl");
+    const response = await fetch("http://localhost:8080/shorten", {
+      method: "POST",
+      body: JSON.stringify({ url }),
+      headers: {
+        "Content-Type": "application/json", // Specify the content type
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => data)
+      .catch((error) => {
+        console.error(error);
+      });
+
+    if (response.success) {
+      // wait for result
+      // setState
+      console.log(response);
+      setUrl(`http://localhost:8080/${response.redirectID}`);
+    }
   };
   return (
     <FormContainer onSubmit={handleSubmit}>
