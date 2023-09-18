@@ -3,5 +3,10 @@
   "version": "1.0.0",
   "description": "minurl backend api",
   "main": "app.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "nanoid": "^5.0.1"
+  },
+  "type": "module"
 }
