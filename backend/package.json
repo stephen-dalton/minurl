@@ -1,0 +1,7 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "minurl backend api",
+  "main": "app.js",
+  "license": "MIT"
+}
