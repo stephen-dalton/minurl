@@ -5,6 +5,10 @@ app.use(express.json());
 
 const URLS = {};
 
+const server = app.listen(8080, "127.0.0.1", () => {
+  console.log("API Running...");
+});
+
 /**
  * Add Express Configuration for CORS Support.
  */
@@ -23,15 +27,14 @@ app.get("/", (req, res) => {
 });
 
 app.post("/shorten", (req, res) => {
-  console.log(req.body);
-
   const { url } = req.body;
-  const redirectID = nanoid();
-
-  URLS[redirectID] = url;
-
-  console.log(JSON.stringify(URLS, null, 2));
-  res.send({ success: true, redirectID });
+  const redirectId = nanoid();
+  URLS[redirectId] = url;
+  const { address, port } = server.address();
+  res.send({
+    success: true,
+    redirectUrl: `http://${address}:${port}/${redirectId}`,
+  });
 });
 
 app.get("/:redirectId", (req, res) => {
@@ -40,8 +43,4 @@ app.get("/:redirectId", (req, res) => {
   const redirectURL = URLS[redirectId];
 
   res.redirect(redirectURL);
-});
-
-app.listen(8080, () => {
-  console.log("API Running...");
 });
